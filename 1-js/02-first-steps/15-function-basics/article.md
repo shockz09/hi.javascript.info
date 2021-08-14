@@ -1,18 +1,18 @@
 # Functions
 
-Quite often we need to perform a similar action in many places of the script.
+अक्सर हमें स्क्रिप्ट के कई स्थानों पर इसी तरह की कार्रवाई करने की आवश्यकता होती है।
 
-For example, we need to show a nice-looking message when a visitor logs in, logs out and maybe somewhere else.
+उदाहरण के लिए, जब कोई आगंतुक लॉग इन करता है, लॉग आउट करता है और शायद कहीं और एक अच्छा दिखने वाला संदेश दिखाना चाहता है।
 
-Functions are the main "building blocks" of the program. They allow the code to be called many times without repetition.
+कार्य कार्यक्रम के मुख्य "बिल्डिंग ब्लॉक्स" हैं। वे बिना दोहराव के कोड को कई बार कॉल करने की अनुमति देते हैं।
 
-We've already seen examples of built-in functions, like `alert(message)`, `prompt(message, default)` and `confirm(question)`. But we can create functions of our own as well.
+हम पहले से ही अंतर्निहित कार्यों के उदाहरण देख चुके हैं, जैसे `alert(message)`, `prompt(message, default)` तथा `confirm(question)`. लेकिन हम अपने स्वयं के कार्य भी बना सकते हैं।
 
 ## Function Declaration
 
-To create a function we can use a *function declaration*.
+एक फ़ंक्शन बनाने के लिए हम  *function declaration*. का उपयोग कर सकते हैं
 
-It looks like this:
+यह इस तरह दिखेगा:
 
 ```js
 function showMessage() {
@@ -20,17 +20,16 @@ function showMessage() {
 }
 ```
 
-The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (comma-separated, empty in the example above) and finally the code of the function, also named "the function body", between curly braces.
+`function` कीवर्ड पहले जाता है, फिर *फ़ंक्शन का नाम* जाता है, फिर कोष्ठकों के बीच *पैरामीटर* की एक सूची (उपरोक्त उदाहरण में अल्पविराम से अलग, खाली) और अंत में फ़ंक्शन का कोड, जिसका नाम " फंक्शन बॉडी", घुंघराले ब्रेसिज़ के बीच।
 
 ```js
 function name(parameters) {
   ...body...
 }
 ```
+हमारे नए फ़ंक्शन को इसके नाम से बुलाया जा सकता है: `showMessage()`.
 
-Our new function can be called by its name: `showMessage()`.
-
-For instance:
+उदाहरण के लिए:
 
 ```js run
 function showMessage() {
@@ -43,17 +42,16 @@ showMessage();
 */!*
 ```
 
-The call `showMessage()` executes the code of the function. Here we will see the message two times.
+कॉल `showMessage()` फ़ंक्शन के कोड को निष्पादित करता है। यहां हम संदेश को दो बार देखेंगे।
 
-This example clearly demonstrates one of the main purposes of functions: to avoid code duplication.
+यह उदाहरण स्पष्ट रूप से कार्यों के मुख्य उद्देश्यों में से एक को प्रदर्शित करता है: कोड दोहराव से बचने के लिए।
 
-If we ever need to change the message or the way it is shown, it's enough to modify the code in one place: the function which outputs it.
-
+यदि हमें कभी भी संदेश या उसके दिखाए जाने के तरीके को बदलने की आवश्यकता होती है, तो यह कोड को एक ही स्थान पर संशोधित करने के लिए पर्याप्त है: वह फ़ंक्शन जो इसे आउटपुट करता है।
 ## Local variables
 
-A variable declared inside a function is only visible inside that function.
+किसी फ़ंक्शन के अंदर घोषित एक चर केवल उस फ़ंक्शन के अंदर ही दिखाई देता है।
 
-For example:
+उदाहरण के लिए:
 
 ```js run
 function showMessage() {
@@ -71,7 +69,7 @@ alert( message ); // <-- Error! The variable is local to the function
 
 ## Outer variables
 
-A function can access an outer variable as well, for example:
+एक फ़ंक्शन बाहरी चर को भी एक्सेस कर सकता है, उदाहरण के लिए:
 
 ```js run no-beautify
 let *!*userName*/!* = 'John';
@@ -84,9 +82,9 @@ function showMessage() {
 showMessage(); // Hello, John
 ```
 
-The function has full access to the outer variable. It can modify it as well.
+फ़ंक्शन के पास बाहरी चर तक पूर्ण पहुंच है। यह इसे संशोधित भी कर सकता है।
 
-For instance:
+उदाहरण के लिए:
 
 ```js run
 let *!*userName*/!* = 'John';
@@ -105,9 +103,9 @@ showMessage();
 alert( userName ); // *!*Bob*/!*, the value was modified by the function
 ```
 
-The outer variable is only used if there's no local one.
+बाहरी चर का उपयोग केवल तभी किया जाता है जब कोई स्थानीय न हो।
 
-If a same-named variable is declared inside the function then it *shadows* the outer one. For instance, in the code below the function uses the local `userName`. The outer one is ignored:
+यदि फ़ंक्शन के अंदर एक ही नामित चर घोषित किया जाता है तो यह बाहरी को *छाया* देता है। उदाहरण के लिए, नीचे दिए गए कोड में फ़ंक्शन स्थानीय `उपयोगकर्ता नाम` का उपयोग करता है। बाहरी को अनदेखा किया जाता है:
 
 ```js run
 let userName = 'John';
@@ -137,9 +135,9 @@ It's a good practice to minimize the use of global variables. Modern code has fe
 
 ## Parameters
 
-We can pass arbitrary data to functions using parameters (also called *function arguments*) .
+हम पैरामीटर (जिसे *फ़ंक्शन तर्क* भी कहा जाता है) का उपयोग करके फ़ंक्शन के लिए मनमाना डेटा पास कर सकते हैं।
 
-In the example below, the function has two parameters: `from` and `text`.
+नीचे दिए गए उदाहरण में, फ़ंक्शन के दो पैरामीटर हैं: `from` तथा `text`.
 
 ```js run
 function showMessage(*!*from, text*/!*) { // arguments: from, text
@@ -152,9 +150,9 @@ showMessage('Ann', "What's up?"); // Ann: What's up? (**)
 */!*
 ```
 
-When the function is called in lines `(*)` and `(**)`, the given values are copied to local variables `from` and `text`. Then the function uses them.
+जब फ़ंक्शन को लाइनों में कहा जाता है `(*)` तथ `(**)`, दिए गए मान स्थानीय चर में कॉपी किए जाते हैं `from` तथा `text`. फिर फ़ंक्शन उनका उपयोग करता है।
 
-Here's one more example: we have a variable `from` and pass it to the function. Please note: the function changes `from`, but the change is not seen outside, because a function always gets a copy of the value:
+यहाँ एक और उदाहरण है: हमारे पास एक चर है `from` और इसे फ़ंक्शन में पास करें। कृपया ध्यान दें: फ़ंक्शन बदलता है `from`, लेकिन परिवर्तन बाहर नहीं देखा जाता है, क्योंकि एक फ़ंक्शन को हमेशा मूल्य की एक प्रति मिलती है:
 
 
 ```js run
@@ -373,14 +371,14 @@ It is a widespread practice to start a function with a verbal prefix which vague
 
 For instance, functions that start with `"show"` usually show something.
 
-Function starting with...
+Function की शुरुआत...
 
 - `"get…"` -- return a value,
 - `"calc…"` -- calculate something,
 - `"create…"` -- create something,
 - `"check…"` -- check something and return a boolean, etc.
 
-Examples of such names:
+ऐसे नामों के उदाहरण:
 
 ```js no-beautify
 showMessage(..)     // shows a message
@@ -389,8 +387,7 @@ calcSum(..)         // calculates a sum and returns the result
 createForm(..)      // creates a form (and usually returns it)
 checkPermission(..) // checks a permission, returns true/false
 ```
-
-With prefixes in place, a glance at a function name gives an understanding what kind of work it does and what kind of value it returns.
+उपसर्गों के साथ, फ़ंक्शन नाम पर एक नज़र यह समझ देती है कि यह किस प्रकार का कार्य करता है और यह किस प्रकार का मूल्य देता है।
 
 ```smart header="One function -- one action"
 A function should do exactly what is suggested by its name, no more.
@@ -416,13 +413,13 @@ These are exceptions. Generally functions names should be concise and descriptiv
 
 ## Functions == Comments
 
-Functions should be short and do exactly one thing. If that thing is big, maybe it's worth it to split the function into a few smaller functions. Sometimes following this rule may not be that easy, but it's definitely a good thing.
+कार्य छोटे होने चाहिए और ठीक एक काम करना चाहिए। अगर वह चीज बड़ी है, तो शायद यह फ़ंक्शन को कुछ छोटे कार्यों में विभाजित करने के लायक है। कभी-कभी इस नियम का पालन करना इतना आसान नहीं हो सकता है, लेकिन यह निश्चित रूप से एक अच्छी बात है।
 
-A separate function is not only easier to test and debug -- its very existence is a great comment!
+एक अलग फ़ंक्शन न केवल परीक्षण और डीबग करना आसान है - इसका अस्तित्व एक महान टिप्पणी है!
 
-For instance, compare the two functions `showPrimes(n)` below. Each one outputs [prime numbers](https://en.wikipedia.org/wiki/Prime_number) up to `n`.
+उदाहरण के लिए, दो कार्यों की तुलना करें `showPrimes(n)` नीचे। हर एक आउटपुट [प्राइम नंबर](https://hi.wikipedia.org/wiki/%E0%A4%85%E0%A4%AD%E0%A4%BE%E0%A4%9C%E0%A5%8D%E0%A4%AF_%E0%A4%B8%E0%A4%82%E0%A4%96%E0%A5%8D%E0%A4%AF%E0%A4%BE) तक `n`.
 
-The first variant uses a label:
+पहला संस्करण एक लेबल का उपयोग करता है:
 
 ```js
 function showPrimes(n) {
@@ -437,7 +434,7 @@ function showPrimes(n) {
 }
 ```
 
-The second variant uses an additional function `isPrime(n)` to test for primality:
+दूसरा संस्करण एक अतिरिक्त फ़ंक्शन का उपयोग करता है `isPrime(n)` प्राथमिकता के लिए परीक्षण करने के लिए:
 
 ```js
 function showPrimes(n) {
@@ -456,14 +453,12 @@ function isPrime(n) {
   return true;
 }
 ```
-
-The second variant is easier to understand, isn't it? Instead of the code piece we see a name of the action (`isPrime`). Sometimes people refer to such code as *self-describing*.
-
-So, functions can be created even if we don't intend to reuse them. They structure the code and make it readable.
+दूसरा संस्करण समझना आसान है, है ना? कोड पीस के बजाय हम क्रिया का एक नाम देखते हैं (`isPrime`).कभी-कभी लोग इस तरह के कोड का उल्लेख करते हैं: *स्वयं का वर्णन*.
+इसलिए, फ़ंक्शन बनाए जा सकते हैं, भले ही हम उनका पुन: उपयोग करने का इरादा न रखते हों। वे कोड की संरचना करते हैं और इसे पठनीय बनाते हैं।
 
 ## Summary
 
-A function declaration looks like this:
+एक समारोह घोषणा इस तरह दिखती है:
 
 ```js
 function name(parameters, delimited, by, comma) {
@@ -471,18 +466,18 @@ function name(parameters, delimited, by, comma) {
 }
 ```
 
-- Values passed to a function as parameters are copied to its local variables.
-- A function may access outer variables. But it works only from inside out. The code outside of the function doesn't see its local variables.
-- A function can return a value. If it doesn't, then its result is `undefined`.
+- किसी फ़ंक्शन को दिए गए मान पैरामीटर के रूप में उसके स्थानीय चर में कॉपी किए जाते हैं।
+- एक फ़ंक्शन बाहरी चरों तक पहुँच सकता है। लेकिन यह केवल अंदर से बाहर काम करता है। फ़ंक्शन के बाहर का कोड इसके स्थानीय चर नहीं देखता है।
+- एक फ़ंक्शन एक मान वापस कर सकता है। यदि ऐसा नहीं होता है, तो इसका परिणाम है `undefined`.
 
-To make the code clean and easy to understand, it's recommended to use mainly local variables and parameters in the function, not outer variables.
+कोड को साफ और समझने में आसान बनाने के लिए, फ़ंक्शन में मुख्य रूप से स्थानीय चर और पैरामीटर का उपयोग करने की अनुशंसा की जाती है, बाहरी चर नहीं।
 
-It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side-effect.
-
+एक फ़ंक्शन को समझना हमेशा आसान होता है जो पैरामीटर प्राप्त करता है, उनके साथ काम करता है और एक ऐसे फ़ंक्शन की तुलना में परिणाम देता है जिसमें कोई पैरामीटर नहीं होता है, लेकिन बाहरी चर को साइड-इफेक्ट के रूप में संशोधित करता है।
+एक फ़ंक्शन को समझना हमेशा आसान होता है जो पैरामीटर प्राप्त करता है, उनके साथ काम करता है और एक ऐसे फ़ंक्शन की तुलना में परिणाम देता है जिसमें कोई पैरामीटर नहीं होता है, लेकिन बाहरी चर को साइड-इफेक्ट के रूप में संशोधित करता है।
 Function naming:
 
-- A name should clearly describe what the function does. When we see a function call in the code, a good name instantly gives us an understanding what it does and returns.
-- A function is an action, so function names are usually verbal.
-- There exist many well-known function prefixes like `create…`, `show…`, `get…`, `check…` and so on. Use them to hint what a function does.
+- एक नाम स्पष्ट रूप से वर्णन करना चाहिए कि फ़ंक्शन क्या करता है। जब हम कोड में एक फ़ंक्शन कॉल देखते हैं, तो एक अच्छा नाम हमें तुरंत समझ देता है कि यह क्या करता है और वापस लौटता है।
+- एक फ़ंक्शन एक क्रिया है, इसलिए फ़ंक्शन नाम आमतौर पर मौखिक होते हैं।
+- कई प्रसिद्ध फ़ंक्शन उपसर्ग मौजूद हैं जैसे `create…`, `show…`, `get…`, `check…` और इसी तरह। फ़ंक्शन क्या करता है यह संकेत देने के लिए उनका उपयोग करें।
 
-Functions are the main building blocks of scripts. Now we've covered the basics, so we actually can start creating and using them. But that's only the beginning of the path. We are going to return to them many times, going more deeply into their advanced features.
+कार्य लिपियों के मुख्य निर्माण खंड हैं। अब हमने मूल बातें शामिल कर ली हैं, इसलिए हम वास्तव में उन्हें बनाना और उनका उपयोग करना शुरू कर सकते हैं। लेकिन यह सिर्फ रास्ते की शुरुआत है। हम कई बार उनके पास वापस जा रहे हैं, उनकी उन्नत सुविधाओं में और अधिक गहराई से जा रहे हैं।
